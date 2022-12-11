@@ -5,4 +5,5 @@ export type Contact = {
   lastName: string;
   phone: string;
   file: TFile;
+  lastContact?: Date;
 }

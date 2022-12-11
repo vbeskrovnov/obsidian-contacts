@@ -1,8 +1,18 @@
-/*
+.contact-card {
+  border: 1px solid var(--background-modifier-border);
+  margin-bottom: 15px;
+  padding: 8px;
+  cursor: pointer;
+}
 
-This CSS file will be included with your plugin, and
-available in the app when your plugin is enabled.
+.contact-card .name {
+  font-size: 1.1em;
+  margin-bottom: 5px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
 
-If your plugin does not need CSS, delete this file.
-
-*/
+.contact-card .lastContact {
+  font-size: 0.8em;
+}

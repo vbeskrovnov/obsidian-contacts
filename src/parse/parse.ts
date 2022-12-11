@@ -25,8 +25,17 @@ export async function parseContactData(file: TFile): Promise<Contact | null> {
     name: contactsDict['Name'],
     lastName: contactsDict['Last Name'],
     phone: contactsDict['Phone'],
+    lastContact: parseDate(contactsDict['Last chat']),
     file: file,
   }
+}
+
+function parseDate(value: string): Date | undefined {
+  const parsedDate = value.match(/(\[\[)?(?<date>[0-9-]+)(\]\])?/)
+  if (!parsedDate || !parsedDate.groups) {
+    return undefined;
+  }
+  return new Date(parsedDate.groups['date']);
 }
 
 function isContactFile(
