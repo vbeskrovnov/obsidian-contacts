@@ -1,6 +1,7 @@
 import * as React from "react";
 import { openFile } from "src/file/file";
 import { Contact } from "src/parse/contact";
+import { diffDateToday } from "src/util/dates";
 
 type ContactProps = {
 	contact: Contact;
@@ -16,20 +17,10 @@ export const ContactView = (props: ContactProps) => {
 				</div>
 				{contact.lastContact && (
 					<div className="lastContact">
-						Last contact: {diffDate(contact.lastContact)} days ago
+						Last contact: {diffDateToday(contact.lastContact)} days ago
 					</div>
 				)}
 			</div>
 		</div>
 	);
 };
-
-function diffDate(date: Date): number {
-	const oneDay = 24 * 60 * 60 * 1000;
-	const today = new Date();
-
-	const diffDays = Math.round(
-		Math.abs((today.getTime() - date.getTime()) / oneDay)
-	);
-	return diffDays;
-}

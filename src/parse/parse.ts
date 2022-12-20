@@ -1,7 +1,18 @@
 import { TFile } from "obsidian";
 import { Contact } from "./contact";
 
-export async function parseContactData(file: TFile): Promise<Contact | null> {
+export async function parseContactFiles(files: TFile[]) {
+  const contactsData: Contact[] = [];
+  for (const contactFile of files) {
+    const contact = await parseContactData(contactFile);
+    if (contact) {
+      contactsData.push(contact);
+    }
+  }
+  return contactsData;
+}
+
+async function parseContactData(file: TFile): Promise<Contact | null> {
   const { vault } = window.app;
   const fileContents = await vault.cachedRead(file);
   if (!isContactFile(fileContents)) {

@@ -3,3 +3,8 @@ export const CONTACTS_VIEW_CONFIG = {
 	name: "Contacts",
 	icon: "contact",
 };
+
+export enum Sort {
+	NAME,
+	LAST_CONTACT
+}
