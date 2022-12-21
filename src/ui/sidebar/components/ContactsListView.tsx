@@ -25,6 +25,8 @@ export const ContactsListView = (props: ContactsListProps) => {
 					return (a.name + a.lastName).localeCompare(b.name + b.lastName);
 				case Sort.LAST_CONTACT:
 					return compareDatesOrUndefined(a.lastContact, b.lastContact);
+				case Sort.BIRTHDAY:
+					return compareDatesOrUndefined(a.birthday, b.birthday);
 				default:
 					return 0;
 			}

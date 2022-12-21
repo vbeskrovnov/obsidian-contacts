@@ -40,6 +40,17 @@ export const HeaderView = (props: HeaderProps) => {
 						ref={(element) => (buttons.current[2] = element)}
 						onClick={() => props.onSortChange(Sort.LAST_CONTACT)}
 					/>
+					<div
+						id="sort-by-birthday-btn"
+						data-icon="cake"
+						className={
+							"clickable-icon nav-action-button " +
+							(props.sort === Sort.BIRTHDAY && "is-active")
+						}
+						aria-label="Sort By Birthday"
+						ref={(element) => (buttons.current[3] = element)}
+						onClick={() => props.onSortChange(Sort.BIRTHDAY)}
+					/>
 				</div>
 			</div>
 		</div>

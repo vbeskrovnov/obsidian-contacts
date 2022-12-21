@@ -37,6 +37,7 @@ async function parseContactData(file: TFile): Promise<Contact | null> {
     lastName: contactsDict['Last Name'],
     phone: contactsDict['Phone'],
     lastContact: parseDate(contactsDict['Last chat']),
+    birthday: parseDate(contactsDict['Birthday']),
     file: file,
   }
 }
