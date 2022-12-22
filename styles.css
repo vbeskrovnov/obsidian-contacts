@@ -16,3 +16,13 @@
 .contact-card .lastContact {
   font-size: 0.8em;
 }
+
+.vl {
+  border-left: 1px solid;
+  height: 20px;
+  margin: 4px 3px 0 3px;
+}
+
+.workspace-leaf-content[data-type='contacts-view'] .view-content {
+  padding-top: 0;
+}

@@ -1,4 +1,7 @@
-import { TFile, TFolder, Vault } from "obsidian";
+import { normalizePath, TFile, TFolder, Vault } from "obsidian";
+import { join } from "path";
+
+const { vault } = window.app;
 
 export async function openFile(file: TFile) {
   const { workspace } = window.app;
@@ -14,4 +17,55 @@ export function findContactFiles(contactsFolder: TFolder) {
     }
   });
   return contactFiles;
+}
+
+export function createContactFile(folderPath: string) {
+  if (!folderPath) {
+    throw new Error("Failed to find contacts folder");
+  }
+
+  vault.create(normalizePath(join(folderPath, `Contact ${findNextFileNumber(folderPath)}.md`)), `
+  /---contact---/
+  | key       | value |
+  | --------- | ----- |
+  | Name      |       |
+  | Last Name |       |
+  | Phone     |       |
+  | Telegram  |       |
+  | Linkedin  |       |
+  | Birthday  |       |
+  | Last chat |       |
+  | Friends   |       |
+  /---contact---/`)
+    .then(createdFile => openFile(createdFile));
+}
+
+function findNextFileNumber(folderPath: string) {
+  const folder = vault.getAbstractFileByPath(
+    normalizePath(folderPath)
+  ) as TFolder;
+
+  let nextNumber = 0;
+  Vault.recurseChildren(folder, (contactNote) => {
+    if (!(contactNote instanceof TFile)) {
+      return;
+    }
+    const name = contactNote.basename;
+    const regex = /Contact(?<number>\s\d+)*/g;
+    for (const match of name.matchAll(regex)) {
+      if (!match.groups || !match.groups.number) {
+        if (nextNumber === 0) {
+          nextNumber = 1;
+        }
+        continue;
+      }
+      const currentNumberString = match.groups.number.trim();
+      if (currentNumberString != undefined && currentNumberString !== "") {
+        const currentNumber = parseInt(currentNumberString);
+        nextNumber = Math.max(nextNumber, (currentNumber + 1));
+      }
+
+    }
+  });
+  return nextNumber === 0 ? "" : nextNumber.toString();
 }

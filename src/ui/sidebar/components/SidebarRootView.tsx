@@ -1,7 +1,7 @@
 import { normalizePath, TFile, TFolder } from "obsidian";
 import * as React from "react";
 import { useApp } from "src/context/hooks";
-import { findContactFiles } from "src/file/file";
+import { createContactFile, findContactFiles } from "src/file/file";
 import { Contact } from "src/parse/contact";
 import { parseContactFiles } from "src/parse/parse";
 import { Sort } from "src/util/constants";
@@ -32,7 +32,11 @@ export const SidebarRootView = () => {
 
 	return (
 		<div>
-			<HeaderView onSortChange={setSort} sort={sort} />
+			<HeaderView
+				onSortChange={setSort}
+				onCreateContact={() => createContactFile(folder)}
+				sort={sort}
+			/>
 			<ContactsListView contacts={contacts} sort={sort} />
 		</div>
 	);

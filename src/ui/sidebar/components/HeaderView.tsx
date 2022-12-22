@@ -5,6 +5,7 @@ import { Sort } from "src/util/constants";
 type HeaderProps = {
 	onSortChange: React.Dispatch<React.SetStateAction<Sort>>;
 	sort: Sort;
+	onCreateContact: () => void;
 };
 
 export const HeaderView = (props: HeaderProps) => {
@@ -18,6 +19,15 @@ export const HeaderView = (props: HeaderProps) => {
 		<div>
 			<div className="nav-header">
 				<div className="nav-buttons-container">
+					<div
+						id="create-btn"
+						className="clickable-icon nav-action-button"
+						aria-label="Create New Contact"
+						onClick={props.onCreateContact}
+					>
+						Create
+					</div>
+					<div className="vl"></div>
 					<div
 						id="sort-by-name-btn"
 						data-icon="baseline"
