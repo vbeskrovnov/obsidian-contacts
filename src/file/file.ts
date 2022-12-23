@@ -27,18 +27,18 @@ export function createContactFile(folderPath: string) {
   }
 
   vault.create(normalizePath(join(folderPath, `Contact ${findNextFileNumber(folderPath)}.md`)), `
-  /---contact---/
-  | key       | value |
-  | --------- | ----- |
-  | Name      |       |
-  | Last Name |       |
-  | Phone     |       |
-  | Telegram  |       |
-  | Linkedin  |       |
-  | Birthday  |       |
-  | Last chat |       |
-  | Friends   |       |
-  /---contact---/`)
+/---contact---/
+| key       | value |
+| --------- | ----- |
+| Name      |       |
+| Last Name |       |
+| Phone     |       |
+| Telegram  |       |
+| Linkedin  |       |
+| Birthday  |       |
+| Last chat |       |
+| Friends   |       |
+/---contact---/`)
     .then(createdFile => openFile(createdFile));
 }
 
