@@ -1,4 +1,4 @@
-import { normalizePath, TFile, TFolder, Vault } from "obsidian";
+import { normalizePath, Notice, TFile, TFolder, Vault } from "obsidian";
 import { join } from "path";
 
 const { vault } = window.app;
@@ -20,8 +20,10 @@ export function findContactFiles(contactsFolder: TFolder) {
 }
 
 export function createContactFile(folderPath: string) {
-  if (!folderPath) {
-    throw new Error("Failed to find contacts folder");
+  const folder = vault.getAbstractFileByPath(folderPath)
+  if (!folder) {
+    new Notice(`Can not find path: '${folderPath}'. Please update "Contacts" plugin settings`);
+    return;
   }
 
   vault.create(normalizePath(join(folderPath, `Contact ${findNextFileNumber(folderPath)}.md`)), `
