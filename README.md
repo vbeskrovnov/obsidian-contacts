@@ -1,5 +1,8 @@
 # Obsidian Contacts Plugin
-Introducing the [Obsidian](https://obsidian.md/) Contacts Plugin! With this plugin, you can easily organize and manage your contacts within [Obsidian](https://obsidian.md/). Simply create a note with contact information and use the plugin's features to quickly search, filter, and sort through your contacts.
+Introducing the [Obsidian](https://obsidian.md/) Contacts Plugin! With this plugin, you can easily organize and manage your contacts within [Obsidian](https://obsidian.md/). Simply create a note with contact information and use the plugin's features to quickly search, and sort through your contacts. Contacts plugin also helps you to remember birthdays of your contacts and keeps track of the last time you met them.
+
+<img width="600" alt="Obsidian Contacts plugin image" src="https://user-images.githubusercontent.com/9114994/209868806-e4d8c95e-e144-4a7f-8b8f-52f036cd2df8.png">
+
 
 ## Installation
 
