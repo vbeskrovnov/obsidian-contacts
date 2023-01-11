@@ -1,10 +1,7 @@
-import { normalizePath, Notice, TFile, TFolder, Vault } from "obsidian";
+import { normalizePath, Notice, TFile, TFolder, Vault, Workspace } from "obsidian";
 import { join } from "path";
 
-const { vault } = window.app;
-
-export async function openFile(file: TFile) {
-  const { workspace } = window.app;
+export async function openFile(file: TFile, workspace: Workspace) {
   const leaf = workspace.getLeaf()
   await leaf.openFile(file, { active: true });
 }
@@ -19,14 +16,14 @@ export function findContactFiles(contactsFolder: TFolder) {
   return contactFiles;
 }
 
-export function createContactFile(folderPath: string) {
+export function createContactFile(folderPath: string, vault: Vault, workspace: Workspace) {
   const folder = vault.getAbstractFileByPath(folderPath)
   if (!folder) {
     new Notice(`Can not find path: '${folderPath}'. Please update "Contacts" plugin settings`);
     return;
   }
 
-  vault.create(normalizePath(join(folderPath, `Contact ${findNextFileNumber(folderPath)}.md`)), `
+  vault.create(normalizePath(join(folderPath, `Contact ${findNextFileNumber(folderPath, vault)}.md`)), `
 /---contact---/
 | key       | value |
 | --------- | ----- |
@@ -39,10 +36,10 @@ export function createContactFile(folderPath: string) {
 | Last chat |       |
 | Friends   |       |
 /---contact---/`)
-    .then(createdFile => openFile(createdFile));
+    .then(createdFile => openFile(createdFile, workspace));
 }
 
-function findNextFileNumber(folderPath: string) {
+function findNextFileNumber(folderPath: string, vault: Vault) {
   const folder = vault.getAbstractFileByPath(
     normalizePath(folderPath)
   ) as TFolder;
