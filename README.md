@@ -6,15 +6,7 @@ Introducing the [Obsidian](https://obsidian.md/) Contacts Plugin! With this plug
 
 ## Installation
 
-### Manual 
-1. Download `main.js`, `manifest.json`, and `styles.css` from the latest [release](https://github.com/vbeskrovnov/obsidian-contacts/releases).
-1. Create a directory `obsidian-contacts` in your Obsidian vault plugins directory: `<VaultFolder>/.obsidian/plugins/`. The final path should be `<VaultFolder>/.obsidian/plugins/obsidian-contacts`.
-1. Move the downloaded files (`main.js`, `manifest.json`, and `styles.css`) into the newly created directory.(`<VaultFolder>/.obsidian/plugins/obsidian-contacts`)
-1. Restart Obsidian app.
-1. Enable `Contacts` pugin in the `Community plugins` settings tab.
-
 ### Automatic
-> :warning: This installation option is not yet available. It will be made available as soon as https://github.com/obsidianmd/obsidian-releases/pull/1465 is merged.
 
 #### Disable `Safe Mode` in Obsidian to be able to install community plugins:
 1. Go to the `Settings` menu and select `Community Plugins`.
@@ -25,6 +17,13 @@ Introducing the [Obsidian](https://obsidian.md/) Contacts Plugin! With this plug
 1. Search for the `Contacts` plugin.
 1. Click the `Install` button to add the plugin.
 1. In the `Community Plugins` menu, enable the `Contacts` plugin.
+
+### Manual 
+1. Download `main.js`, `manifest.json`, and `styles.css` from the latest [release](https://github.com/vbeskrovnov/obsidian-contacts/releases).
+1. Create a directory `obsidian-contacts` in your Obsidian vault plugins directory: `<VaultFolder>/.obsidian/plugins/`. The final path should be `<VaultFolder>/.obsidian/plugins/obsidian-contacts`.
+1. Move the downloaded files (`main.js`, `manifest.json`, and `styles.css`) into the newly created directory.(`<VaultFolder>/.obsidian/plugins/obsidian-contacts`)
+1. Restart Obsidian app.
+1. Enable `Contacts` pugin in the `Community plugins` settings tab.
 
 ## Usage
 After enabling the plugin in the settings menu, you should see the contacts button appear in the left sidebar. Click it to open the Contacts view in the right sidebar.
