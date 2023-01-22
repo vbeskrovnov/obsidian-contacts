@@ -1,14 +1,7 @@
-import { App, Plugin, PluginSettingTab, Setting } from 'obsidian';
+import { Plugin } from 'obsidian';
 import { ContactsView } from "src/ui/sidebar/sidebarView";
 import { CONTACTS_VIEW_CONFIG } from "src/util/constants";
-
-interface ContactsPluginSettings {
-	contactsFolder: string;
-}
-
-const DEFAULT_SETTINGS: ContactsPluginSettings = {
-	contactsFolder: '/'
-}
+import { ContactsPluginSettings, ContactsSettingTab, DEFAULT_SETTINGS } from './settings/settings';
 
 export default class ContactsPlugin extends Plugin {
 	settings: ContactsPluginSettings;
@@ -50,33 +43,5 @@ export default class ContactsPlugin extends Plugin {
 		this.app.workspace.revealLeaf(
 			this.app.workspace.getLeavesOfType(CONTACTS_VIEW_CONFIG.type)[0]
 		);
-	}
-}
-
-class ContactsSettingTab extends PluginSettingTab {
-	plugin: ContactsPlugin;
-
-	constructor(app: App, plugin: ContactsPlugin) {
-		super(app, plugin);
-		this.plugin = plugin;
-	}
-
-	display(): void {
-		const { containerEl } = this;
-
-		containerEl.empty();
-
-		containerEl.createEl('h2', { text: 'Settings for "Contacts" plugin.' });
-
-		new Setting(containerEl)
-			.setName('Contacts folder location')
-			.setDesc('Files in this folder and all subfolders will be available as contacts')
-			.addText(text => text
-				.setPlaceholder('Personal/Contacts')
-				.setValue(this.plugin.settings.contactsFolder)
-				.onChange(async (value) => {
-					this.plugin.settings.contactsFolder = value;
-					await this.plugin.saveSettings();
-				}));
 	}
 }

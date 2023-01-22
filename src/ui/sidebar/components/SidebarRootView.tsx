@@ -14,7 +14,7 @@ type RootProps = {
 };
 
 export const SidebarRootView = (props: RootProps) => {
-	const { vault, workspace } = useApp();
+	const { vault, metadataCache, workspace } = useApp();
 	const [contacts, setContacts] = React.useState<Contact[]>([]);
 	const [sort, setSort] = React.useState<Sort>(Sort.LAST_CONTACT);
 	const folder = props.plugin.settings.contactsFolder;
@@ -30,7 +30,7 @@ export const SidebarRootView = (props: RootProps) => {
 
 		const contactFiles: TFile[] = findContactFiles(contactsFolder);
 
-		parseContactFiles(contactFiles, vault).then((contactsData) =>
+		parseContactFiles(contactFiles, vault, metadataCache).then((contactsData) =>
 			setContacts(contactsData)
 		);
 	}, []);
@@ -39,7 +39,14 @@ export const SidebarRootView = (props: RootProps) => {
 		<div>
 			<HeaderView
 				onSortChange={setSort}
-				onCreateContact={() => createContactFile(folder, vault, workspace)}
+				onCreateContact={() =>
+					createContactFile(
+						folder,
+						props.plugin.settings.template,
+						vault,
+						workspace
+					)
+				}
 				sort={sort}
 			/>
 			<ContactsListView contacts={contacts} sort={sort} />
