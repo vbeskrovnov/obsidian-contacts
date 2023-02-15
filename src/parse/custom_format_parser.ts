@@ -11,7 +11,7 @@ export async function isContactFile(
 
 export async function parseContactData(file: TFile, vault: Vault): Promise<Contact | null> {
   const fileContents = await vault.cachedRead(file);
-  const regexpNames = /^\|(?<key>.+)\|(?<value>.+)\|$/gm;
+  const regexpNames = /^\|(?<key>.+)\|(?<value>.+)\|(\s)*$/gm;
   const contactsDict: { [key: string]: string } = {};
   for (const match of fileContents.matchAll(regexpNames)) {
     if (!match.groups) {
