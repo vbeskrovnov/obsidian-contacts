@@ -45,14 +45,14 @@ export function findContactFiles(contactsFolder: TFolder) {
   return contactFiles;
 }
 
-export function createContactFile(folderPath: string, template: Template, vault: Vault, workspace: Workspace) {
+export function createContactFile(folderPath: string, template: Template, hashtag: string, vault: Vault, workspace: Workspace) {
   const folder = vault.getAbstractFileByPath(folderPath)
   if (!folder) {
     new Notice(`Can not find path: '${folderPath}'. Please update "Contacts" plugin settings`);
     return;
   }
 
-  vault.create(normalizePath(join(folderPath, `Contact ${findNextFileNumber(folderPath, vault)}.md`)), getNewFileContent(template))
+  vault.create(normalizePath(join(folderPath, `Contact ${findNextFileNumber(folderPath, vault)}.md`)), getNewFileContent(template, hashtag))
     .then(createdFile => openFile(createdFile, workspace));
 }
 
@@ -85,13 +85,13 @@ function findNextFileNumber(folderPath: string, vault: Vault) {
   return nextNumber === 0 ? "" : nextNumber.toString();
 }
 
-function getNewFileContent(template: Template): string {
+function getNewFileContent(template: Template, hashtag: string): string {
   switch (template) {
     case Template.CUSTOM:
-      return customFormat;
+      return hashtag + '\n' + customFormat;
     case Template.FRONTMATTER:
-      return frontmatterFormat;
+      return hashtag + '\n' + frontmatterFormat;
     default:
-      return customFormat;
+      return hashtag + '\n' + customFormat;
   }
 }
