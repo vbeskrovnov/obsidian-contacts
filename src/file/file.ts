@@ -86,12 +86,16 @@ function findNextFileNumber(folderPath: string, vault: Vault) {
 }
 
 function getNewFileContent(template: Template, hashtag: string): string {
+  let hashtagSuffix = '';
+  if (hashtag) {
+    hashtagSuffix = '\n' + hashtag;
+  }
   switch (template) {
     case Template.CUSTOM:
-      return hashtag + '\n' + customFormat;
+      return customFormat + hashtagSuffix;
     case Template.FRONTMATTER:
-      return hashtag + '\n' + frontmatterFormat;
+      return frontmatterFormat + hashtagSuffix;
     default:
-      return hashtag + '\n' + customFormat;
+      return customFormat + hashtagSuffix;
   }
 }

@@ -58,7 +58,7 @@ export class ContactsSettingTab extends PluginSettingTab {
     new Setting(containerEl)
       .setName('Default hashtag')
       .setDesc('Hashtag to be used for every contact created')
-      .addDropdown(text => text
+      .addText(text => text
         .setPlaceholder('')
         .setValue(this.plugin.settings.defaultHashtag)
         .onChange(async (value) => {
