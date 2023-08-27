@@ -1,7 +1,7 @@
 {
 	"id": "obsidian-contacts",
 	"name": "Contacts",
-	"version": "1.1.0",
+	"version": "1.2.0",
 	"minAppVersion": "0.15.0",
 	"description": "Allows you to manage and organize your contacts.",
 	"author": "Vadim Beskrovnov",
