@@ -43,6 +43,7 @@ export const SidebarRootView = (props: RootProps) => {
 					createContactFile(
 						folder,
 						props.plugin.settings.template,
+						props.plugin.settings.defaultHashtag,
 						vault,
 						workspace
 					)

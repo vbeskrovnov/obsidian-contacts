@@ -4,6 +4,7 @@ import ContactsPlugin from "src/main";
 export interface ContactsPluginSettings {
   contactsFolder: string;
   template: Template;
+  defaultHashtag: string;
 }
 
 export enum Template {
@@ -12,7 +13,8 @@ export enum Template {
 
 export const DEFAULT_SETTINGS: ContactsPluginSettings = {
   contactsFolder: '/',
-  template: Template.CUSTOM
+  template: Template.CUSTOM,
+  defaultHashtag: ''
 }
 
 export class ContactsSettingTab extends PluginSettingTab {
@@ -50,6 +52,17 @@ export class ContactsSettingTab extends PluginSettingTab {
         .setValue(this.plugin.settings.template)
         .onChange(async (value) => {
           this.plugin.settings.template = value as Template;
+          await this.plugin.saveSettings();
+        }));
+
+    new Setting(containerEl)
+      .setName('Default hashtag')
+      .setDesc('Hashtag to be used for every contact created')
+      .addText(text => text
+        .setPlaceholder('')
+        .setValue(this.plugin.settings.defaultHashtag)
+        .onChange(async (value) => {
+          this.plugin.settings.defaultHashtag = value;
           await this.plugin.saveSettings();
         }));
   }
