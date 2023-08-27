@@ -1,4 +1,4 @@
-import { normalizePath, TFile, TFolder } from "obsidian";
+import { normalizePath, TAbstractFile, TFile, TFolder } from "obsidian";
 import * as React from "react";
 import { useApp } from "src/context/hooks";
 import { createContactFile, findContactFiles } from "src/file/file";
@@ -19,7 +19,11 @@ export const SidebarRootView = (props: RootProps) => {
 	const [sort, setSort] = React.useState<Sort>(Sort.LAST_CONTACT);
 	const folder = props.plugin.settings.contactsFolder;
 
-	React.useEffect(() => {
+	const isFileInFolder = (file: TAbstractFile) => {
+		return file.path.startsWith(folder);
+	};
+
+	const parseContacts = () => {
 		const contactsFolder = vault.getAbstractFileByPath(
 			normalizePath(folder)
 		) as TFolder;
@@ -33,7 +37,31 @@ export const SidebarRootView = (props: RootProps) => {
 		parseContactFiles(contactFiles, vault, metadataCache).then((contactsData) =>
 			setContacts(contactsData)
 		);
+	};
+
+	React.useEffect(() => {
+		parseContacts();
 	}, []);
+
+	React.useEffect(() => {
+		const updateFiles = (file: TAbstractFile) => {
+			if (isFileInFolder(file)) {
+				parseContacts();
+			}
+		};
+
+		vault.on("create", updateFiles);
+		vault.on("modify", updateFiles);
+		vault.on("rename", updateFiles);
+		vault.on("delete", updateFiles);
+
+		return () => {
+			vault.off("create", updateFiles);
+			vault.off("modify", updateFiles);
+			vault.off("rename", updateFiles);
+			vault.off("delete", updateFiles);
+		};
+	}, [vault, folder]);
 
 	return (
 		<div>
