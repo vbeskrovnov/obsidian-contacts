@@ -71,7 +71,7 @@ function setIconForButton(button: HTMLElement | null) {
 	if (button != null) {
 		const icon = button.getAttr("data-icon");
 		if (icon != null) {
-			setIcon(button, icon, 16);
+			setIcon(button, icon);
 		}
 	}
 }
